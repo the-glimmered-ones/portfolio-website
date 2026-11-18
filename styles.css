@@ -24,6 +24,7 @@ h2{
 a>h2{
     background-color: inherit;
     padding: 2px 75px;
+    font-weight: normal;
 }
 a:hover{
     text-decoration: underline solid 2px;
