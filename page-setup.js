@@ -2,6 +2,9 @@ if (!document.URL.includes(".html")){
     window.location.href = "index.html";
 }
 
+document.head.innerHTML = `
+<link rel="icon" type="image/x-icon" href="favicon.ico">`
++ document.head.innerHTML
 document.body.innerHTML = 
 `<nav>
     <a href="index.html" id="index"><h2>Home</h2></a>
