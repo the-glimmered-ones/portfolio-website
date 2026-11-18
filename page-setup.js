@@ -3,7 +3,7 @@ if (!document.URL.includes(".html")){
 }
 
 document.head.innerHTML = `
-<link rel="icon" type="image/x-icon" href="favicon.ico">`
+<link rel="icon" href="favicon.ico">`
 + document.head.innerHTML
 document.body.innerHTML = 
 `<nav>
@@ -14,7 +14,6 @@ document.body.innerHTML =
 </nav>`
 + document.body.innerHTML
 
-console.log(document.URL.indexOf("portfolio-website/"))
 const address = document.URL.substring(document.URL.indexOf("portfolio-website/")+"portfolio-website/".length, document.URL.indexOf(".html"))
 console.log(address)
 const btn = document.getElementById(address);
