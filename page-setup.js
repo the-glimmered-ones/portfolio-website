@@ -1,3 +1,7 @@
+if (!document.URL.includes(".html")){
+    window.location.href = "index.html";
+}
+
 document.body.innerHTML = 
 `<nav>
     <a href="index.html" id="index"><h2>Home</h2></a>
@@ -7,7 +11,7 @@ document.body.innerHTML =
 </nav>`
 + document.body.innerHTML
 
-console.log(document.URL)
+console.log(document.URL.indexOf("portfolio-website/"))
 const address = document.URL.substring(document.URL.indexOf("portfolio-website/")+"portfolio-website/".length, document.URL.indexOf(".html"))
 console.log(address)
 const btn = document.getElementById(address);
