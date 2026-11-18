@@ -2,7 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #181818;
+    background-color: #202020;
     color: whitesmoke;
     font-family: monospace;
 }
@@ -13,7 +13,7 @@ nav{
     width: max-content;
     border: inset 1.5px;
     padding: 0px;
-    background-color: #252525;
+    background-color: #393939;
 }
 h2{
     color: inherit;
