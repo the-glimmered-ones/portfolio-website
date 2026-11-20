@@ -13,7 +13,6 @@ async function serveRes(url: string, subfolder: string = ""){
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
     
     const token = process.env.BLOB_READ_WRITE_TOKEN;
-    console.log(token)
     const options = {
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -21,7 +20,9 @@ async function serveRes(url: string, subfolder: string = ""){
     };
     console.log(foundTexture.toString())
     if (foundTexture){
-        return new Response(await (await Bun.fetch(foundTexture, options)).blob())
+        const final = await (await Bun.fetch(foundTexture, options)).blob()
+        console.log(final)
+        return new Response(final)
     }
     else{
         return new Response("404 not found")
