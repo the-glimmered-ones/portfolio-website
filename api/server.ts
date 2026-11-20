@@ -37,16 +37,12 @@ async function serveRes(url: string, subfolder: string = ""){
         //     return new Response('Not found', { status: 404 })
         // }
 
-        const file = foundTexture// await findPrivateFileForUser(user.id, fileId) 
+// await findPrivateFileForUser(user.id, fileId) 
         /*
         auth() and findPrivateFileForUser() represent your application’s authentication and authorization. The route accepts an opaque application file ID, then looks up the exact stored pathname for that user. Do not pass a user-supplied pathname directly to get().
         */
 
-        if (!file) {
-            return new Response('Not found', { status: 404 })
-        }
-
-        const result = await get(file.pathname, {
+        const result = await get(foundTexture.toString(), {
             access: 'private',
         })
         console.log("result: ", result)
