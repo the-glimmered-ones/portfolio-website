@@ -3,7 +3,7 @@ console.log("server file reached")
 const HOST_NAME = "localhost"
 const PORT = process.env.PORT//2323
 const ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/"
-
+console.log(PORT)
 
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
