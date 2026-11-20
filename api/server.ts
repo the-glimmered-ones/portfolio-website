@@ -31,11 +31,11 @@ async function serveRes(url: string, subfolder: string = ""){
             //     return new Response('Unauthorized', { status: 401 })
             // }
 
-        const fileId = new URL(url).searchParams.get('fileId')
+        // const fileId = new URL(url).searchParams.get('fileId')
 
-        if (!fileId) {
-            return new Response('Not found', { status: 404 })
-        }
+        // if (!fileId) {
+        //     return new Response('Not found', { status: 404 })
+        // }
 
         const file = foundTexture// await findPrivateFileForUser(user.id, fileId) 
         /*
@@ -49,7 +49,7 @@ async function serveRes(url: string, subfolder: string = ""){
         const result = await get(file.pathname, {
             access: 'private',
         })
-        console.log(result)
+        console.log("result: ", result)
 
         if (!result || result.statusCode !== 200) {
             return new Response('Not found', { status: 404 })
