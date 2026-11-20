@@ -49,6 +49,7 @@ async function serveRes(url: string, subfolder: string = ""){
         const result = await get(file.pathname, {
             access: 'private',
         })
+        console.log(result)
 
         if (!result || result.statusCode !== 200) {
             return new Response('Not found', { status: 404 })
