@@ -1,4 +1,7 @@
-import page from "../index.html"
+import index from "../index.html"
+import code from "../code.html"
+import art from "../art.html"
+import about from "../about.html"
 console.log("server file reached")
 const HOST_NAME = "localhost"
 const PORT = 2323
@@ -21,7 +24,11 @@ const server = Bun.serve({
     port: PORT,
     //hostname: HOST_NAME,
     routes: {
-        "/": page,
+        "/": index,
+        "/code.html": code,
+        "/art.html": art,
+        "/about.html": about,
+        
         "/digital-art/": ({url}) => {return serveRes(url, "digital-art/")},
         "/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/pixel-art/*": ({url}) => {return serveRes(url, "pixel-art/")},

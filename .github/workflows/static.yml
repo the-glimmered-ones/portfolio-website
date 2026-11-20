@@ -41,5 +41,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-        env: 
-          ART_STORE_TOKEN: ${{ secrets.ART_STORE_TOKEN }}
