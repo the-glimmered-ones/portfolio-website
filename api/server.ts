@@ -42,7 +42,7 @@ async function serveRes(url: string, subfolder: string = ""){
         auth() and findPrivateFileForUser() represent your application’s authentication and authorization. The route accepts an opaque application file ID, then looks up the exact stored pathname for that user. Do not pass a user-supplied pathname directly to get().
         */
 
-        const result = await get(foundTexture.toString(), {
+        const result = await get(foundTexture.pathname, {
             access: 'private',
         })
         console.log("result: ", result)
