@@ -14,7 +14,8 @@ document.body.innerHTML =
 </nav>`
 + document.body.innerHTML
 
-const address = document.URL.substring(document.URL.indexOf("portfolio-website/")+"portfolio-website/".length, document.URL.indexOf(".html"))
+const HOST_WEBSITE = "onrender.com/"//"portfolio-website/"
+const address = document.URL.substring(document.URL.indexOf(HOST_WEBSITE)+HOST_WEBSITE.length, document.URL.indexOf(".html"))
 console.log(address)
 const btn = document.getElementById(address);
 btn.style.textDecoration = "underline solid 2px";
