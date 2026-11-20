@@ -32,7 +32,7 @@ async function serveRes(url: string, subfolder: string = ""){
 
 const server = Bun.serve({
     port: PORT,
-    hostname: HOST_NAME,
+    //hostname: HOST_NAME,
     routes: {
         "/": index,
         "/code.html": code,
