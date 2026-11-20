@@ -21,7 +21,7 @@ async function serveRes(url: string, subfolder: string = ""){
             "Authorization": `Bearer ${token}`,
         },
     };
-    console.log(foundTexture)
+    console.log(foundTexture.toString())
     if (foundTexture){
         return new Response(await (await Bun.fetch(foundTexture, options)).blob())
     }
