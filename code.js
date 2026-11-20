@@ -1,26 +1,4 @@
-import { get } from "@vercel/blob";
-import { NextResponse } from "next/server";
+var ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/";
+var path = ART_STORE_URL + "digital-art/";
 
-export async function GET(request) {
-  // Authenticate the request before serving the Blob.
-
-  const pathname = request.nextUrl.searchParams.get("pathname");
-  if (!pathname) {
-    return NextResponse.json({ error: "Missing pathname" }, { status: 400 });
-  }
-
-  const result = await get(pathname, {
-    access: "private",
-  });
-  if (result === null) {
-    return new NextResponse("Not found", { status: 404 });
-  }
-
-  return new NextResponse(result.stream, {
-    headers: {
-      "Cache-Control": "private, no-cache",
-      "Content-Type": result.blob.contentType,
-      "X-Content-Type-Options": "nosniff",
-    },
-  });
-}
+document.getElementById("img").setAttribute("src", path)

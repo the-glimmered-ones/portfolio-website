@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev": "bun --watch /api/server.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/bun": "^1.4.5"
+  }
+}
