@@ -2,7 +2,6 @@ import index from "../index.html"
 import code from "../code.html"
 import art from "../art.html"
 import about from "../about.html"
-import { secrets } from "bun"
 console.log("server file reached")
 const HOST_NAME = "localhost"
 const PORT = 2323
@@ -40,7 +39,7 @@ const server = Bun.serve({
         "/art.html": art,
         "/about.html": about,
         
-        "/digital-art/": ({url}) => {return serveRes(url, "digital-art/")},
+        "/digital-art/": ({url}) => {return serveRes(url, "digital-art/*")},
         "/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/pixel-art/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
