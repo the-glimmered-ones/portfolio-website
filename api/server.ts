@@ -42,7 +42,7 @@ const server = Bun.serve({
         "/art/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
-    error(error) {
-        return new Response(`oopsies: ${error.message}`, { status: 404 });
-    },
+    fetch(req){
+        return new Response("hi", {status: 500})
+    }
 })
