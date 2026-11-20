@@ -26,7 +26,7 @@ async function serveRes(url: string, subfolder: string = ""){
         return new Response(await (await Bun.fetch(foundTexture, options)).blob())
     }
     else{
-        return new Response("404 not found")
+        return new Response("waahhhhhh")
     }
 }
 
