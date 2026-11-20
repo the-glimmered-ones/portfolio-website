@@ -26,7 +26,7 @@ async function serveRes(url: string, subfolder: string = ""){
         return new Response(await (await Bun.fetch(foundTexture, options)).blob())
     }
     else{
-        return new Response("waahhhhhh")
+        return new Response("404 not found")
     }
 }
 
@@ -39,9 +39,9 @@ const server = Bun.serve({
         "/art.html": art,
         "/about.html": about,
         
-        "/digital-art/*": ({url}) => {return serveRes(url, "digital-art/")},
-        "/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
-        "/pixel-art/*": ({url}) => {return serveRes(url, "pixel-art/")},
+        "/art/digital/*": ({url}) => {return serveRes(url, "digital-art/")},
+        "/art/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
+        "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
     error(error) {
         return new Response(`Error: ${error.message}`, { status: 404 });
