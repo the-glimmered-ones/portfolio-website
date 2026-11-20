@@ -39,7 +39,7 @@ const server = Bun.serve({
         "/art.html": art,
         "/about.html": about,
         
-        "/digital-art/": ({url}) => {return serveRes(url, "digital-art/*")},
+        "/digital-art/*": ({url}) => {return serveRes(url, "digital-art/")},
         "/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/pixel-art/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
