@@ -43,6 +43,7 @@ const server = Bun.serve({
         "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
     fetch(req){
+        console.log(req.url)
         return new Response("hi", {status: 500})
     }
 })
