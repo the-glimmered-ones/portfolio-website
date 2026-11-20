@@ -1,7 +1,7 @@
 import page from "../index.html"
 console.log("server file reached")
 const HOST_NAME = "localhost"
-const PORT = 2323
+const PORT = process.env.PORT//2323
 const ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/"
 
 
