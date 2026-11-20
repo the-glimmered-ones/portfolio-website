@@ -2,6 +2,7 @@ import index from "../index.html"
 import code from "../code.html"
 import art from "../art.html"
 import about from "../about.html"
+import { secrets } from "bun"
 console.log("server file reached")
 const HOST_NAME = "localhost"
 const PORT = 2323
@@ -11,9 +12,19 @@ console.log(PORT)
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
+    
+    const token =
+        await Bun.secrets.get({ service: "github", name: "BLOB_READ_WRITE_TOKEN" }) ||
+        process.env.BLOB_READ_WRITE_TOKEN;
+
+    const options = {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+    };
     console.log(foundTexture)
     if (foundTexture){
-        return new Response(await (await Bun.fetch(foundTexture)).blob())
+        return new Response(await (await Bun.fetch(foundTexture, options)).blob())
     }
     else{
         return new Response("404 not found")
