@@ -21,7 +21,7 @@ async function serveRes(url: string, subfolder: string = ""){
     console.log(foundTexture.toString())
     if (foundTexture){
         const final = await (await Bun.fetch(foundTexture, options)).blob()
-        console.log(final.text())
+        console.log((await final.text()).toString())
         return new Response(final)
     }
     else{
