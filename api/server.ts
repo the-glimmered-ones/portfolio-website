@@ -43,6 +43,6 @@ const server = Bun.serve({
         "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
     },
     error(error) {
-        return new Response(`Error: ${error.message}`, { status: 404 });
+        return new Response(`oops: ${error.message}`, { status: 404 });
     },
 })
