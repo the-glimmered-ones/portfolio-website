@@ -15,7 +15,7 @@ async function serveRes(url: string, subfolder: string = ""){
     const token =
         await Bun.secrets.get({ service: "github", name: "BLOB_READ_WRITE_TOKEN" }) ||
         process.env.BLOB_READ_WRITE_TOKEN;
-
+    console.log(token)
     const options = {
         headers: {
             "Authorization": `Bearer ${token}`,
