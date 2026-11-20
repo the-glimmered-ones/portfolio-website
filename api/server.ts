@@ -1,7 +1,9 @@
+import page from "../index.html"
 console.log("server file reached")
 const HOST_NAME = "localhost"
 const PORT = 2323
 const ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/"
+
 
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
@@ -19,7 +21,7 @@ const server = Bun.serve({
     port: PORT,
     hostname: HOST_NAME,
     routes: {
-        "/": new Response(`hi`,{status: 404}),
+        "/": page,
         "/digital-art/": ({url}) => {return serveRes(url, "digital-art/")},
         "/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/pixel-art/*": ({url}) => {return serveRes(url, "pixel-art/")},
