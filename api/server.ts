@@ -22,26 +22,6 @@ async function serveRes(url: string, subfolder: string = ""){
     // };
     console.log(foundTexture.toString())
     if (foundTexture){
-        // const final = await (await Bun.fetch(foundTexture, options)).blob()
-        // console.log((await final.text()).toString())
-        //async function GET(request: Request) {
-            //const user = //await auth()
-
-            // if (!user) {
-            //     return new Response('Unauthorized', { status: 401 })
-            // }
-
-        // const fileId = new URL(url).searchParams.get('fileId')
-
-        // if (!fileId) {
-        //     return new Response('Not found', { status: 404 })
-        // }
-
-// await findPrivateFileForUser(user.id, fileId) 
-        /*
-        auth() and findPrivateFileForUser() represent your application’s authentication and authorization. The route accepts an opaque application file ID, then looks up the exact stored pathname for that user. Do not pass a user-supplied pathname directly to get().
-        */
-
         const result = await get(foundTexture.toString(), {
             access: 'private',
             headers: {
@@ -83,6 +63,6 @@ const server = Bun.serve({
     },
     fetch(req){
         console.log(req.url)
-        return new Response("no route assigned for this url", {status: 80085})
+        return new Response("no route assigned for this url", {status: 420})
     }
 })
