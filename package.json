@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "bun --watch /api/server.ts"
+    "dev": "bun --watch /api/server.ts",
+    "build": "bun run build.js"
   },
   "dependencies": {
     "@vercel/blob": "^2.9.0"

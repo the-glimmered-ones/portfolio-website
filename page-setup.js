@@ -14,10 +14,20 @@ document.body.innerHTML =
 </nav>`
 + document.body.innerHTML
 
-const HOST_WEBSITE = "onrender.com/"//"portfolio-website/"
-const address = document.URL.substring(document.URL.indexOf(HOST_WEBSITE)+HOST_WEBSITE.length, document.URL.indexOf(".html"))
+const HOST_WEBSITE = "onrender.com/"
+const LOCAL_WEBSITE = "portfolio-website/"
+let startIndex = 0
+if (document.URL.indexOf(HOST_WEBSITE) == -1){
+    startIndex = document.URL.indexOf(LOCAL_WEBSITE)+LOCAL_WEBSITE.length
+}
+else {
+    startIndex = document.URL.indexOf(HOST_WEBSITE)+HOST_WEBSITE.length
+}
+const address = document.URL.substring(startIndex, document.URL.indexOf(".html"))
 console.log(address)
-const btn = document.getElementById(address);
-btn.style.textDecoration = "underline solid 2px";
-btn.style.color = "rgb(50, 224, 50)";
-btn.style.backgroundColor = "black";
+addEventListener("load", () => {
+    const btn = document.getElementById(address);
+    btn.style.textDecoration = "underline solid 2px";
+    btn.style.color = "rgb(50, 224, 50)";
+    btn.style.backgroundColor = "black";
+})
