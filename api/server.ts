@@ -76,6 +76,7 @@ const server = Bun.serve({
         "/code.html": code,
         "/art.html": art,
         "/about.html": about,
+        "/favicon.ico": Bun.file("./favicon.ico"),
         "/art/digital/*": ({url}) => {return serveRes(url, "digital-art/")},
         "/art/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
         "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
