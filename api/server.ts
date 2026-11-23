@@ -83,6 +83,6 @@ const server = Bun.serve({
     },
     fetch(req){
         console.log(req.url)
-        return new Response("hi", {status: 500})
+        return new Response("no route assigned for this url", {status: 80085})
     }
 })
