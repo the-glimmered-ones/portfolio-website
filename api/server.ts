@@ -10,6 +10,7 @@ const PORT = 2323
 const ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/"
 console.log(PORT)
 
+//https://vercel.com/docs/vercel-blob/using-blob-sdk#read-write-tokens
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
