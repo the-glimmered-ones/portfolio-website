@@ -13,7 +13,6 @@ console.log(PORT)
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
-    
     // const token = process.env.BLOB_READ_WRITE_TOKEN;
     // const options = {
     //     headers: {
