@@ -14,14 +14,21 @@ console.log(PORT)
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf("art/") + ("art/").length)
     if (filePath.indexOf("digital") != -1){
-        const pathStart = filePath.slice(0,filePath.indexOf("digital")+("digital").length)
+        subfolder = "digital"
+    }
+    if (filePath.indexOf("pixel") != -1){
+        subfolder = "pixel"
+    }
+    if (subfolder == "digital" || subfolder == "pixel"){
+        const pathStart = filePath.slice(0,filePath.indexOf(subfolder)+ subfolder.length)
         const pathEnd = filePath.slice(pathStart.length)
         console.log("start: ", pathStart)
         console.log("end: ", pathEnd)
-        filePath = pathStart + "-art"
+        filePath = pathStart + "-art" + pathEnd
     }
     console.log("filepath: ", filePath)
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
+    console.log("url: ", foundTexture.pathname)
     // const token = process.env.BLOB_READ_WRITE_TOKEN;
     // const options = {
     //     headers: {
