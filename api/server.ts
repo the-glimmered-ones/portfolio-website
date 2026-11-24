@@ -13,20 +13,11 @@ console.log(PORT)
 //https://vercel.com/docs/vercel-blob/using-blob-sdk#read-write-tokens
 async function serveRes(url: string, subfolder: string = ""){
     let filePath = url.slice(url.indexOf("art/") + ("art/").length)
-    if (filePath.indexOf("digital") != -1){
-        subfolder = "digital"
-    }
-    if (filePath.indexOf("pixel") != -1){
-        subfolder = "pixel"
-    }
     if (subfolder == "digital" || subfolder == "pixel"){
         const pathStart = filePath.slice(0,filePath.indexOf(subfolder)+ subfolder.length)
         const pathEnd = filePath.slice(pathStart.length)
-        console.log("start: ", pathStart)
-        console.log("end: ", pathEnd)
         filePath = pathStart + "-art" + pathEnd
     }
-    console.log("filepath: ", filePath)
     const foundTexture = new URL(ART_STORE_URL + filePath)
     console.log("url: ", foundTexture.toString())
     // const token = process.env.BLOB_READ_WRITE_TOKEN;
@@ -35,24 +26,27 @@ async function serveRes(url: string, subfolder: string = ""){
     //         "Authorization": `Bearer ${token}`,
     //     },
     // };
+ 
+    // Server: issue a signed token. `issueSignedToken` calls the Blob
+    // control API, so cache the result and reuse it across requests until it's
+    // near expiry to avoid a network round-trip on every URL you sign.
     const token = await issueSignedToken({
-        pathname: foundTexture.toString(),
-        operations: ['head'],
-        validUntil: Date.now() + 60 * 60 * 1000,
+    pathname: foundTexture.pathname,
+    operations: ['get'],
+    validUntil: Date.now() + 60 * 60 * 1000,
     });
-
+    
+    // Sign a URL valid for 5 minutes, even though the token is valid for 1 hour.
     const { presignedUrl } = await presignUrl(token, {
-        operation: 'head',
-        pathname: foundTexture.toString(),
-        access: 'private',
+    operation: 'get',
+    pathname: foundTexture.pathname,
+    access: 'private',
+    validUntil: Date.now() + 5 * 60 * 1000,
     });
+    
+    const res = await fetch(presignedUrl);
+    console.log(res)
 
-    const res = await fetch(presignedUrl, { method: 'HEAD' });
-    const contentLength = res.headers.get('content-length');
-    const contentType = res.headers.get('content-type');
-    console.log("res: ", res)
-
-    console.log("foundTexture: ", foundTexture.toString())
     if (foundTexture){
         const result = await get(foundTexture.toString(), {
             access: 'private',
@@ -91,9 +85,9 @@ const server = Bun.serve({
         "/art.html": art,
         "/about.html": about,
         "/favicon.ico": Bun.file("./favicon.ico"),
-        "/art/digital/*": ({url}) => {return serveRes(url, "digital-art/")},
+        "/art/digital/*": ({url}) => {return serveRes(url, "digital")},
         "/art/pen-and-ink/*": ({url}) => {return serveRes(url, "pen-and-ink/")},
-        "/art/pixel/*": ({url}) => {return serveRes(url, "pixel-art/")},
+        "/art/pixel/*": ({url}) => {return serveRes(url, "pixel")},
     },
     fetch(req){
         console.log(req.url)
