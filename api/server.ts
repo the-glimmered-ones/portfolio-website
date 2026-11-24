@@ -2,10 +2,10 @@ import index from "../index.html"
 import code from "../code.html"
 import art from "../art.html"
 import about from "../about.html"
-import { get } from '@vercel/blob'
+import { get, issueSignedToken, presignUrl } from '@vercel/blob'
 
 console.log("server file reached")
-const HOST_NAME = "localhost"
+//const HOST_NAME = "localhost"
 const PORT = 2323
 const ART_STORE_URL = "https://y1srumwmhlmocc73.private.blob.vercel-storage.com/"
 console.log(PORT)
@@ -20,7 +20,24 @@ async function serveRes(url: string, subfolder: string = ""){
     //         "Authorization": `Bearer ${token}`,
     //     },
     // };
-    console.log(foundTexture.toString())
+    const token = await issueSignedToken({
+        pathname: foundTexture.pathname,
+        operations: ['head'],
+        validUntil: Date.now() + 60 * 60 * 1000,
+    });
+
+    const { presignedUrl } = await presignUrl(token, {
+        operation: 'head',
+        pathname: foundTexture.pathname,
+        access: 'private',
+    });
+
+    const res = await fetch(presignedUrl, { method: 'HEAD' });
+    const contentLength = res.headers.get('content-length');
+    const contentType = res.headers.get('content-type');
+    console.log("res: ", res)
+
+    console.log("foundTexture: ", foundTexture.toString())
     if (foundTexture){
         const result = await get(foundTexture.toString(), {
             access: 'private',
@@ -33,7 +50,7 @@ async function serveRes(url: string, subfolder: string = ""){
         if (!result || result.statusCode !== 200) {
             return new Response('Not found', { status: 404 })
         }
-
+        
         //return new Response(final)
         return new Response(result.stream, {
             headers: {
@@ -48,11 +65,13 @@ async function serveRes(url: string, subfolder: string = ""){
     }
 }
 
+
 const server = Bun.serve({
     port: PORT,
     //hostname: HOST_NAME,
     routes: {
         "/": index,
+        "/index.html": index,
         "/code.html": code,
         "/art.html": art,
         "/about.html": about,

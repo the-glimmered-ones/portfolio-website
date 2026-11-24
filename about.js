@@ -7,7 +7,6 @@ function changeColor() {
     hue = 0;
   }
   const color = `hsl(${hue} 80% 75% / 25%)`;
-  console.log(color);
   for (let i of socials) {
     i.style.backgroundColor = color;
   }
