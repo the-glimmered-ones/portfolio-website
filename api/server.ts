@@ -45,33 +45,8 @@ async function serveRes(url: string, subfolder: string = ""){
     });
     
     const res = await fetch(presignedUrl);
-    console.log(res)
+    return res;
 
-    if (foundTexture){
-        const result = await get(foundTexture.toString(), {
-            access: 'private',
-            headers: {
-                "Authorization": `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
-            },
-        })
-        console.log("result: ", result)
-
-        if (!result || result.statusCode !== 200) {
-            return new Response('Not found', { status: 404 })
-        }
-        
-        //return new Response(final)
-        return new Response(result.stream, {
-            headers: {
-            'content-type': result.blob.contentType,
-            'x-content-type-options': 'nosniff',
-            'cache-control': 'private, no-store',
-            },
-        })
-    }
-    else{
-        return new Response("404 not found")
-    }
 }
 
 
