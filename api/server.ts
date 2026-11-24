@@ -36,14 +36,14 @@ async function serveRes(url: string, subfolder: string = ""){
     //     },
     // };
     const token = await issueSignedToken({
-        pathname: foundTexture.pathname,
+        pathname: foundTexture.toString(),
         operations: ['head'],
         validUntil: Date.now() + 60 * 60 * 1000,
     });
 
     const { presignedUrl } = await presignUrl(token, {
         operation: 'head',
-        pathname: foundTexture.pathname,
+        pathname: foundTexture.toString(),
         access: 'private',
     });
 
