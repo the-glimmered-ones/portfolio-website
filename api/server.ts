@@ -31,7 +31,7 @@ async function serveRes(url: string, subfolder: string = ""){
     // control API, so cache the result and reuse it across requests until it's
     // near expiry to avoid a network round-trip on every URL you sign.
     const token = await issueSignedToken({
-    pathname: foundTexture.pathname,
+    pathname: foundTexture.pathname.slice(1),
     operations: ['get'],
     validUntil: Date.now() + 60 * 60 * 1000,
     });
@@ -39,7 +39,7 @@ async function serveRes(url: string, subfolder: string = ""){
     // Sign a URL valid for 5 minutes, even though the token is valid for 1 hour.
     const { presignedUrl } = await presignUrl(token, {
     operation: 'get',
-    pathname: foundTexture.pathname.slice(1),
+    pathname: foundTexture.pathname,
     access: 'private',
     validUntil: Date.now() + 5 * 60 * 1000,
     });
