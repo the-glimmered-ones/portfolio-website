@@ -27,8 +27,8 @@ async function serveRes(url: string, subfolder: string = ""){
         filePath = pathStart + "-art" + pathEnd
     }
     console.log("filepath: ", filePath)
-    const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
-    console.log("url: ", foundTexture.pathname)
+    const foundTexture = new URL(ART_STORE_URL + filePath)
+    console.log("url: ", foundTexture.toString())
     // const token = process.env.BLOB_READ_WRITE_TOKEN;
     // const options = {
     //     headers: {
