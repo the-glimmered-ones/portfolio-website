@@ -39,7 +39,7 @@ async function serveRes(url: string, subfolder: string = ""){
     // Sign a URL valid for 5 minutes, even though the token is valid for 1 hour.
     const { presignedUrl } = await presignUrl(token, {
     operation: 'get',
-    pathname: foundTexture.pathname,
+    pathname: foundTexture.pathname.slice(1),
     access: 'private',
     validUntil: Date.now() + 5 * 60 * 1000,
     });
