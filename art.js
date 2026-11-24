@@ -6,4 +6,7 @@ if (document.URL.includes("portfolio-website/")){
 else {
     path = "/" + path
 }
-document.getElementById("img").setAttribute("src", path)
+const img = document.getElementById("img")
+img.setAttribute("src", path)
+img.style.width = "max-content"
+img.style.height = "max-content"
