@@ -12,7 +12,14 @@ console.log(PORT)
 
 //https://vercel.com/docs/vercel-blob/using-blob-sdk#read-write-tokens
 async function serveRes(url: string, subfolder: string = ""){
-    let filePath = url.slice(url.indexOf(subfolder) + (subfolder).length)
+    let filePath = url.slice(url.indexOf("art/") + ("art/").length)
+    if (filePath.indexOf("digital") != -1){
+        const pathStart = filePath.slice(0,filePath.indexOf("digital")+("digital").length)
+        const pathEnd = filePath.slice(pathStart.length)
+        console.log("start: ", pathStart)
+        console.log("end: ", pathEnd)
+        filePath = pathStart + "-art"
+    }
     console.log("filepath: ", filePath)
     const foundTexture = new URL(ART_STORE_URL + subfolder + filePath)
     // const token = process.env.BLOB_READ_WRITE_TOKEN;
