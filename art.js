@@ -10,3 +10,4 @@ const img = document.getElementById("img")
 img.setAttribute("src", path)
 img.style.width = "max-content"
 img.style.height = "max-content"
+img.style.maxWidth = "500px"
